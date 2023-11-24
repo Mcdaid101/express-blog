@@ -7,10 +7,32 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.6/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Express Blog</title>
 </head>
 <body style="font-family: 'Roboto', sans-serif;">
-<h1 class="text-lg text-center pt-4"> Matt's Blog </h1>
-
+<!--title -->
+<h1 class="flex justify-center items-center mt-4 text-lg"> Matt's Blog </h1>
+<!--main div -->
+<div class="flex justify-center items-center w-full mt-8">
+    <!-- div determines blog on different screen sizes -->
+    <div class="lg:w-[50%] sm:w-[80%] md:w-[70%]">
+        <!-- form  -->
+        <form action="/submit" method="POST" id="form1">
+        <!-- title  -->
+        <div class="mt-4">
+         <input type="text" name="title" placeholder="title">
+        </div>
+        <!-- content  -->
+        <div class="mt-4">
+         <textarea class="textarea textarea-bordered w-full h-32" type="text" name="content" placeholder="content"></textarea>
+        </div>
+        </form>
+        <!-- submit  -->
+        <button type="submit" form="form1" value="Post" class="btn btn-info mt-4">Post</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
