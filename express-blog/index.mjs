@@ -25,6 +25,18 @@ app.get("/blogs", (req, res) => {
   res.render("blogs.ejs", {blogPosts});
 });
 
+// blog detail 
+app.get("/blogs/:id", (req, res) => {
+  const blogId = req.params.id;
+  const selectedBlog = blogPosts.find(blog => blog.id === blogId);
+
+  if (!selectedBlog) {
+    return res.status(404).send("Blog not found");
+  }
+
+  res.render("blogDetail.ejs", { blog: selectedBlog });
+});
+
 //submits the blog from form and adds it to the blogPosts array
 app.post("/submit", (req, res) => {
   const blogTitle = req.body["title"];

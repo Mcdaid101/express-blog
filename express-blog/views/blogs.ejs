@@ -7,13 +7,35 @@
         <div class="card">
           <div class="card-body">
             <h2 class="card-title"><%= blog.title %></h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <p><%= blog.content %></p>
             <div class="card-actions justify-end">
-              <button class="btn btn-primary">Read</button>
+            <!-- Modal -->
+                <button id="openModalBtn" class="btn" onclick="openModal()">open modal</button>
+                <dialog id="my_modal_1" class="modal">
+                  <div class="modal-box w-96 h-80">
+                    <h3 class="font-bold text-lg"><%= blog.title %></h3>
+                    <p class="py-4"><%= blog.content %></p>
+                    <div class="modal-action">
+                      <form method="dialog">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn justify-end">Close</button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
+                
+                <!-- End of modal -->
             </div>
           </div>
       </div>
     </div>
     <% }); %>
+
+<script>
+function openModal() {
+var modal = document.getElementById('my_modal_1');
+modal.showModal();
+  }
+</script>
 
 <%- include("partials/footer.ejs") %>
