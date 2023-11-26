@@ -1,0 +1,19 @@
+<%- include("partials/header.ejs") %>
+<h1 class="text-center mt-20">Blogs: </h1>
+    <!-- div determines blog on different screen sizes -->
+      <% blogPosts.forEach(blog => { %>
+  <div class="flex flex-col justify-center items-center w-full mt-8 bg-black">
+    <div class="lg:w-[50%] sm:w-[80%] md:w-[70%] bg-pink-400">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title"><%= blog.title %></h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end">
+              <button class="btn btn-primary">Read</button>
+            </div>
+          </div>
+      </div>
+    </div>
+    <% }); %>
+
+<%- include("partials/footer.ejs") %>

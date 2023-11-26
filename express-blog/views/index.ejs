@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <%- include("partials/header.ejs") %>
-<!--title -->
-<h1 class="flex justify-center items-center mt-4 text-lg"> Matt's Blog </h1>
 <!--main div -->
 <div class="flex justify-center items-center w-full mt-8">
     <!-- div determines blog on different screen sizes -->
@@ -10,7 +8,7 @@
         <form action="/submit" method="POST" id="form1">
         <!-- title  -->
         <div class="mt-4">
-         <input type="text" name="title" placeholder="title">
+         <input class="w-full" type="text" name="title" placeholder="title">
         </div>
         <!-- content  -->
         <div class="mt-4">
