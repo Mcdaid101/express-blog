@@ -22,23 +22,37 @@ app.get("/about", (req, res) => {
 
 // renders the blogs from the blogPosts array
 app.get("/blogs", (req, res) => {
-  res.render("blogs.ejs", {blogPosts});
+  res.render("blogs.ejs", {blogPosts, index: 0});
 });
 
 //submits the blog from form and adds it to the blogPosts array
 app.post("/submit", (req, res) => {
   const blogTitle = req.body["title"];
   const blogContent = req.body["content"];
+  const currentDate = new Date();
+  const formattedDate = `Posted on ${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}
+                        ${currentDate.getHours()}:${currentDate.getMinutes()}`;
 
   const newPost = {
     title: blogTitle,
     content: blogContent,
+    createdOn: formattedDate,
   };
 
   blogPosts.push(newPost);
 
   res.render("post.ejs", newPost);
   console.log(newPost);
+});
+
+app.post("/delete/:id", (req, res) => {
+  const postId = req.params.id;
+
+  if (blogPosts[postId]) {
+    blogPosts.splice(postId, 1); // Remove the post from the array
+  }
+
+  res.redirect("/blogs"); // Redirect to the blogs page after deletion
 });
 
 app.listen(port, () => {
