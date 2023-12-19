@@ -1,37 +1,35 @@
+<!-- views/blogs.ejs -->
+
 <%- include("partials/header.ejs") %>
 <h1 class="text-center mt-20 text-[#DDF2FD]">Blogs: </h1>
+
 <% if (blogPosts.length > 0) { %>
-    <!-- div determines blog on different screen sizes -->
+  <!-- div determines blog on different screen sizes -->
   <% blogPosts.forEach(blog => { %>
-  <div class="flex flex-col justify-center items-center w-full mt-8">
-    <div class="lg:w-[50%] sm:w-[80%] md:w-[70%]">
-      <div class="collapse bg-base-200">
-        <input type="radio" name="my-accordion-1" checked="checked" /> 
-        <div class="collapse-title text-xl font-medium">
-          <%= blog.title %>
-        </div>
-        <div class="text-right mr-3">
-          <%= blog.createdOn %>
-        </div>
-        <div class="collapse-content"> 
+    <div class="flex flex-col justify-center items-center w-full mt-8">
+      <div class="lg:w-[50%] sm:w-[80%] md:w-[70%]">
+        <div class="bg-white">
+          <a href="/post/<%= blogPosts.indexOf(blog) %>"><%= blog.title %></a>
+          <div class="text-right mr-3">
+            <%= blog.createdOn %>
+          </div>
           <p><%= blog.content %></p>
-          <form action="/delete/<%=index%>" method="POST">
+          <form action="/delete/<%= blogPosts.indexOf(blog) %>" method="POST">
             <button type="submit">Delete</button>
           </form>
         </div>
       </div>
-      </div>
     </div>
-    <% }); %>
-    <% } else { %>
-      <h2 class="text-center">You haven't posted any Blogs yet</h2>
-      <% } %>
+  <% }); %>
+<% } else { %>
+  <h2 class="text-center">You haven't posted any Blogs yet</h2>
+<% } %>
 
 <script>
 function openModal() {
-var modal = document.getElementById('my_modal_1');
-modal.showModal();
-  }
+  var modal = document.getElementById('my_modal_1');
+  modal.showModal();
+}
 </script>
 
 <%- include("partials/footer.ejs") %>

@@ -22,16 +22,28 @@ app.get("/about", (req, res) => {
 
 // renders the blogs from the blogPosts array
 app.get("/blogs", (req, res) => {
-  res.render("blogs.ejs", {blogPosts, index: 0});
+  res.render("blogs.ejs", { blogPosts });
+});
+
+// renders an individual blog post when clicking on the title 
+app.get("/post/:id", (req, res) => {
+  const postId = req.params.id;
+
+  if (blogPosts[postId]) {
+    res.render("post.ejs", {blogPost: blogPosts[postId]});
+  } else {
+    res.status(404).send("Post not found");
+  }
 });
 
 //submits the blog from form and adds it to the blogPosts array
 app.post("/submit", (req, res) => {
+  console.log("Entering /submit route");
+  
   const blogTitle = req.body["title"];
   const blogContent = req.body["content"];
   const currentDate = new Date();
-  const formattedDate = `Posted on ${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}
-                        ${currentDate.getHours()}:${currentDate.getMinutes()}`;
+  const formattedDate = `Posted on ${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()} ${currentDate.getHours()}:${currentDate.getMinutes()}`;
 
   const newPost = {
     title: blogTitle,
@@ -41,10 +53,13 @@ app.post("/submit", (req, res) => {
 
   blogPosts.push(newPost);
 
-  res.render("post.ejs", newPost);
-  console.log(newPost);
+  console.log("Form submitted. Redirecting to /blogs");
+  res.redirect("/blogs");
+
+  console.log("Exiting /submit route");
 });
 
+// delete the post 
 app.post("/delete/:id", (req, res) => {
   const postId = req.params.id;
 

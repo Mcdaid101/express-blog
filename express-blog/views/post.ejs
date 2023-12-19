@@ -5,9 +5,10 @@
 <div class="flex justify-center items-center w-full mt-8">
     <!-- div determines blog on different screen sizes -->
     <div class="lg:w-[50%] sm:w-[80%] md:w-[70%]">
-        <% if (locals.title && locals.content ) { %>
-        <h2><%= title %></h2>
-        <p><%= content %></p>
+        <% if (blogPost) { %>
+        <h2><%= blogPost.title %></h2>
+        <p><%= blogPost.content %></p>
+        
         <% } else { %>
         <h2>Nothing to see here</h2>
         <% } %>
